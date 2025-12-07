@@ -33,7 +33,7 @@ Pastikan Anda telah menginstal:
 Pastikan file `.env` telah dibuat di root direktori proyek dengan isi sebagai berikut:
 
 ```env
-DATABASE_URL="postgresql://[user]:[password]@[host]:[port]/[database]"
+DATABASE_URL="postgresql://postgres.lcxhmrekxlockgswodha:ywW8zpZVQbosWCBE@aws-1-ap-south-1.pooler.supabase.com:5432/postgres"
 ```
 
 *Catatan: Kredensial database sudah dikonfigurasi di lingkungan Anda.*
