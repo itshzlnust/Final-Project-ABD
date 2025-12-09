@@ -1,9 +1,21 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-import config as cfg
 import numpy as np
+
+# Import plotly with error handling
+try:
+    import plotly.graph_objects as go
+    import plotly.express as px
+except ImportError:
+    st.error("Plotly package not found. Please install with: pip install plotly")
+    st.stop()
+
+# Import config with error handling
+try:
+    import config as cfg
+except ImportError:
+    st.error("Config module not found.")
+    st.stop()
 
 # Page configuration
 st.set_page_config(
