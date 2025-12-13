@@ -360,10 +360,10 @@ def plot_region_vs_happiness(df):
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
         font=dict(family='Inter', color='#2d3748', size=12),
-        margin=dict(l=20, r=20, t=60, b=150),  # Maximize bottom margin
-        height=600,
+        margin=dict(l=10, r=10, t=60, b=100),  # Reduced side margins, moderate bottom
+        height=550,
         legend=dict(
-            orientation="h",  
+            orientation="h", 
             yanchor="top", 
             y=-0.1, 
             xanchor="center", 
@@ -371,6 +371,8 @@ def plot_region_vs_happiness(df):
         ),
         dragmode=False
     )
+    # Update trace to add padding around the circle itself
+    fig.update_traces(domain=dict(x=[0.1, 0.9], y=[0.1, 0.9])) 
     return fig
 
 def plot_education_vs_dependence(df):
