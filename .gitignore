@@ -14,7 +14,9 @@ env.bak/
 venv.bak/
 
 # Streamlit
-.streamlit/
+# Streamlit
+.streamlit/*
+!.streamlit/config.toml
 
 # IDEs
 .vscode/

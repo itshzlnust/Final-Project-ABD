@@ -256,6 +256,19 @@ def categorize_unlocks(unlocks):
 
 # ========== VISUALIZATION FUNCTIONS ==========
 
+def common_layout_updates(fig, title):
+    """Apply consistent modern styling to all charts"""
+    fig.update_layout(
+        title={'text': f'<b>{title}</b>', 'font': {'size': 18, 'color': '#2d3748', 'family': 'Inter'}},
+        template='plotly_white',
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font=dict(family='Inter', color='#2d3748', size=12),
+        margin=dict(l=20, r=20, t=50, b=20),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+    )
+    return fig
+
 def plot_device_usage_vs_stress(df):
     """1. Device Usage vs Stress Level - Line Chart"""
     df['device_category'] = df['device_hours_per_day'].apply(categorize_device_hours)
@@ -271,47 +284,13 @@ def plot_device_usage_vs_stress(df):
         mode='lines+markers',
         name='Avg Stress Level',
         line=dict(color='#667eea', width=4, shape='spline'),
-        marker=dict(size=12, color='#667eea', line=dict(color='white', width=2)),
+        marker=dict(size=10, color='#667eea', line=dict(color='white', width=2)),
         fill='tozeroy',
         fillcolor='rgba(102, 126, 234, 0.1)'
     ))
     
-    fig.update_layout(
-        title={'text': '<b>Device Usage vs Stress Level</b>', 'font': {'size': 20, 'color': '#1a202c', 'family': 'Inter'}},
-        xaxis=dict(
-            title={'text': '<b>Daily Device Usage</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=True,
-            gridcolor='#cbd5e0',
-            gridwidth=1,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        yaxis=dict(
-            title={'text': '<b>Average Stress Level</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=True,
-            gridcolor='#cbd5e0',
-            gridwidth=1,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        template='plotly_white',
-        height=450,
-        plot_bgcolor='#ffffff',
-        paper_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Inter', color='#2d3748', size=12),
-        hovermode='x unified',
-        hoverlabel=dict(
-            bgcolor='white',
-            font_size=14,
-            font_family='Inter',
-            font_color='#1a202c'
-        ),
-        margin=dict(l=70, r=30, t=90, b=70)
-    )
+    fig = common_layout_updates(fig, 'Device Usage vs Stress Level')
+    fig.update_layout(height=350)
     return fig
 
 def plot_sleep_vs_anxiety(df):
@@ -329,44 +308,11 @@ def plot_sleep_vs_anxiety(df):
         y=grouped.values,
         marker=dict(color=colors, line=dict(color='white', width=2)),
         text=grouped.values.round(2),
-        textposition='outside',
-        textfont=dict(size=12, color='#2d3748', family='Inter')
+        textposition='auto',
     ))
     
-    fig.update_layout(
-        title={'text': '<b>Sleep Duration vs Anxiety Score</b>', 'font': {'size': 20, 'color': '#1a202c', 'family': 'Inter'}},
-        xaxis=dict(
-            title={'text': '<b>Sleep Duration</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=False,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        yaxis=dict(
-            title={'text': '<b>Average Anxiety Score</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=True,
-            gridcolor='#cbd5e0',
-            gridwidth=1,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        template='plotly_white',
-        height=450,
-        plot_bgcolor='#ffffff',
-        paper_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Inter', color='#2d3748', size=12),
-        hovermode='x unified',
-        hoverlabel=dict(
-            bgcolor='white',
-            font_size=14,
-            font_family='Inter',
-            font_color='#1a202c'
-        ),
-        margin=dict(l=70, r=30, t=90, b=70)
-    )
+    fig = common_layout_updates(fig, 'Sleep Duration vs Anxiety')
+    fig.update_layout(height=350)
     return fig
 
 def plot_device_type_vs_productivity(df):
@@ -382,44 +328,11 @@ def plot_device_type_vs_productivity(df):
         orientation='h',
         marker=dict(color=colors[:len(grouped)], line=dict(color='white', width=2)),
         text=grouped.values.round(2),
-        textposition='outside',
-        textfont=dict(size=12, color='#2d3748', family='Inter')
+        textposition='auto',
     ))
     
-    fig.update_layout(
-        title={'text': '<b>Device Type vs Productivity Score</b>', 'font': {'size': 20, 'color': '#1a202c', 'family': 'Inter'}},
-        xaxis=dict(
-            title={'text': '<b>Average Productivity Score</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=True,
-            gridcolor='#cbd5e0',
-            gridwidth=1,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        yaxis=dict(
-            title={'text': '<b>Device Type</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=False,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        template='plotly_white',
-        height=450,
-        plot_bgcolor='#ffffff',
-        paper_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Inter', color='#2d3748', size=12),
-        hovermode='y unified',
-        hoverlabel=dict(
-            bgcolor='white',
-            font_size=14,
-            font_family='Inter',
-            font_color='#1a202c'
-        ),
-        margin=dict(l=120, r=30, t=90, b=70)
-    )
+    fig = common_layout_updates(fig, 'Device Type vs Productivity')
+    fig.update_layout(height=350)
     return fig
 
 def plot_region_vs_happiness(df):
@@ -430,38 +343,15 @@ def plot_region_vs_happiness(df):
     fig.add_trace(go.Pie(
         labels=grouped.index,
         values=grouped.values,
-        hole=0.4,
+        hole=0.5,
         marker=dict(colors=['#667eea', '#764ba2', '#ff6b9d', '#ffa500', '#6bcb77', '#4d96ff'], 
-                   line=dict(color='white', width=3)),
-        textinfo='label+percent',
-        textposition='outside',
-        textfont=dict(size=13, family='Inter', color='#2d3748')
+                   line=dict(color='white', width=2)),
+        textinfo='percent',
+        hoverinfo='label+value'
     ))
     
-    fig.update_layout(
-        title={'text': '<b>Region vs Happiness Score Distribution</b>', 'font': {'size': 20, 'color': '#1a202c', 'family': 'Inter'}},
-        template='plotly_white',
-        height=450,
-        plot_bgcolor='#ffffff',
-        paper_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Inter', color='#2d3748', size=13),
-        showlegend=True,
-        legend=dict(
-            orientation='v',
-            yanchor='middle',
-            y=0.5,
-            xanchor='left',
-            x=1.05,
-            font=dict(size=13, color='#1a202c')
-        ),
-        hoverlabel=dict(
-            bgcolor='white',
-            font_size=14,
-            font_family='Inter',
-            font_color='#1a202c'
-        ),
-        margin=dict(l=30, r=150, t=90, b=30)
-    )
+    fig = common_layout_updates(fig, 'Happiness by Region')
+    fig.update_layout(height=350)
     return fig
 
 def plot_education_vs_dependence(df):
@@ -480,40 +370,13 @@ def plot_education_vs_dependence(df):
         marker=dict(size=8, color='#764ba2')
     ))
     
+    fig = common_layout_updates(fig, 'Education vs Digital Dependence')
     fig.update_layout(
         polar=dict(
-            radialaxis=dict(
-                visible=True, 
-                range=[0, grouped.max() * 1.2], 
-                gridcolor='#cbd5e0',
-                gridwidth=1,
-                linecolor='#2d3748',
-                linewidth=2,
-                tickfont=dict(size=12, color='#1a202c')
-            ),
-            angularaxis=dict(
-                gridcolor='#cbd5e0',
-                gridwidth=1,
-                linecolor='#2d3748',
-                linewidth=2,
-                tickfont=dict(size=13, color='#1a202c')
-            ),
-            bgcolor='#ffffff'
+            radialaxis=dict(visible=True, range=[0, grouped.max() * 1.2]),
+            bgcolor='rgba(0,0,0,0)'
         ),
-        title={'text': '<b>Education Level vs Digital Dependence Score</b>', 'font': {'size': 20, 'color': '#1a202c', 'family': 'Inter'}},
-        template='plotly_white',
-        height=500,
-        plot_bgcolor='rgba(0,0,0,0)',
-        paper_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Inter', color='#2d3748', size=12),
-        showlegend=True,
-        hoverlabel=dict(
-            bgcolor='white',
-            font_size=14,
-            font_family='Inter',
-            font_color='#1a202c'
-        ),
-        margin=dict(l=80, r=80, t=110, b=80)
+        height=400
     )
     return fig
 
@@ -530,47 +393,12 @@ def plot_gender_vs_stress(df):
         y=grouped['mean'],
         name='Average Stress',
         marker=dict(color=colors, line=dict(color='white', width=2)),
-        error_y=dict(type='data', array=grouped['std'], visible=True, color='#718096'),
         text=grouped['mean'].round(2),
-        textposition='outside',
-        textfont=dict(size=12, color='#2d3748', family='Inter')
+        textposition='auto',
     ))
     
-    fig.update_layout(
-        title={'text': '<b>Gender vs Stress Level</b>', 'font': {'size': 20, 'color': '#1a202c', 'family': 'Inter'}},
-        xaxis=dict(
-            title={'text': '<b>Gender</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=False,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        yaxis=dict(
-            title={'text': '<b>Average Stress Level</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=True,
-            gridcolor='#cbd5e0',
-            gridwidth=1,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        template='plotly_white',
-        height=450,
-        barmode='group',
-        plot_bgcolor='#ffffff',
-        paper_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Inter', color='#2d3748', size=12),
-        hovermode='x unified',
-        hoverlabel=dict(
-            bgcolor='white',
-            font_size=14,
-            font_family='Inter',
-            font_color='#1a202c'
-        ),
-        margin=dict(l=70, r=30, t=90, b=70)
-    )
+    fig = common_layout_updates(fig, 'Gender vs Stress Level')
+    fig.update_layout(height=350)
     return fig
 
 def plot_phone_unlocks_vs_focus(df):
@@ -585,58 +413,23 @@ def plot_phone_unlocks_vs_focus(df):
         x=grouped.index,
         y=grouped.values,
         mode='lines+markers',
-        name='Avg Focus Score',
+        name='Avg Focus',
         line=dict(color='#ffa500', width=4, shape='spline'),
-        marker=dict(size=12, color='#ffa500', line=dict(color='white', width=2)),
+        marker=dict(size=10, color='#ffa500', line=dict(color='white', width=2)),
         fill='tozeroy',
         fillcolor='rgba(255, 165, 0, 0.1)'
     ))
     
-    fig.update_layout(
-        title={'text': '<b>Phone Unlocks vs Focus Score</b>', 'font': {'size': 20, 'color': '#1a202c', 'family': 'Inter'}},
-        xaxis=dict(
-            title={'text': '<b>Daily Phone Unlocks</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=True,
-            gridcolor='#cbd5e0',
-            gridwidth=1,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        yaxis=dict(
-            title={'text': '<b>Average Focus Score</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=True,
-            gridcolor='#cbd5e0',
-            gridwidth=1,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        template='plotly_white',
-        height=450,
-        plot_bgcolor='#ffffff',
-        paper_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Inter', color='#2d3748', size=12),
-        hovermode='x unified',
-        hoverlabel=dict(
-            bgcolor='white',
-            font_size=14,
-            font_family='Inter',
-            font_color='#1a202c'
-        ),
-        margin=dict(l=70, r=30, t=90, b=70)
-    )
+    fig = common_layout_updates(fig, 'Phone Unlocks vs Focus')
+    fig.update_layout(height=350)
     return fig
 
 def plot_income_vs_anxiety(df):
     """8. Income Level vs Anxiety Score - Box Plot"""
     income_order = ['Low', 'Lower-Mid', 'Upper-Mid', 'High']
+    colors = {'Low': '#ff6b9d', 'Lower-Mid': '#ffa500', 'Upper-Mid': '#6bcb77', 'High': '#4d96ff'}
     
     fig = go.Figure()
-    
-    colors = {'Low': '#ff6b9d', 'Lower-Mid': '#ffa500', 'Upper-Mid': '#6bcb77', 'High': '#4d96ff'}
     
     for income in income_order:
         data = df[df['income_level'] == income]['anxiety_score']
@@ -644,53 +437,11 @@ def plot_income_vs_anxiety(df):
             y=data,
             name=income,
             marker=dict(color=colors.get(income, '#999999')),
-            boxmean='sd',
-            line=dict(width=2)
+            boxmean='sd'
         ))
     
-    fig.update_layout(
-        title={'text': '<b>Income Level vs Anxiety Score Distribution</b>', 'font': {'size': 20, 'color': '#1a202c', 'family': 'Inter'}},
-        xaxis=dict(
-            title={'text': '<b>Income Level</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=False,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        yaxis=dict(
-            title={'text': '<b>Anxiety Score</b>', 'font': {'size': 14, 'color': '#2d3748'}},
-            showgrid=True,
-            gridcolor='#cbd5e0',
-            gridwidth=1,
-            linecolor='#2d3748',
-            linewidth=2,
-            tickfont=dict(size=13, color='#1a202c'),
-            showline=True
-        ),
-        template='plotly_white',
-        height=450,
-        plot_bgcolor='#ffffff',
-        paper_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Inter', color='#2d3748', size=12),
-        showlegend=True,
-        legend=dict(
-            orientation='h',
-            yanchor='bottom',
-            y=1.02,
-            xanchor='right',
-            x=1,
-            font=dict(size=12, color='#1a202c')
-        ),
-        hovermode='closest',
-        hoverlabel=dict(
-            bgcolor='white',
-            font_size=14,
-            font_family='Inter',
-            font_color='#1a202c'
-        ),
-        margin=dict(l=70, r=30, t=110, b=70)
-    )
+    fig = common_layout_updates(fig, 'Income vs Anxiety Distribution')
+    fig.update_layout(height=350, showlegend=False)
     return fig
 
 # ========== MAIN APP ==========
