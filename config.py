@@ -61,9 +61,14 @@ def load_data_from_postgres(table_name: str = "mental_health_data"):
         print("DATABASE_URL not set in environment. Cannot load from Postgres.")
         return None
 
+    # specific fix for Supabase/Postgres connection strings
+    if db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://", "postgresql://", 1)
+
     try:
         from sqlalchemy import create_engine, text
-        engine = create_engine(db_url)
+        # Add connect_args for SSL which is required for Supabase
+        engine = create_engine(db_url, connect_args={'sslmode': 'require'})
         query = text("""
             SELECT 
                 wa.stress_level,
