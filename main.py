@@ -264,8 +264,11 @@ def common_layout_updates(fig, title):
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
         font=dict(family='Inter', color='#2d3748', size=12),
-        margin=dict(l=20, r=20, t=50, b=20),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+        margin=dict(l=20, r=20, t=50, b=50),  # Increased bottom margin
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        xaxis=dict(fixedrange=True),  # Disable zoom/pan on X
+        yaxis=dict(fixedrange=True),  # Disable zoom/pan on Y
+        dragmode=False  # Disable drag interactions entirely
     )
     return fig
 
@@ -535,42 +538,42 @@ def main():
             # Key visualizations
             col1, col2 = st.columns(2)
             with col1:
-                st.plotly_chart(plot_device_usage_vs_stress(filtered_df), use_container_width=True)
-                st.plotly_chart(plot_region_vs_happiness(filtered_df), use_container_width=True)
+                st.plotly_chart(plot_device_usage_vs_stress(filtered_df), use_container_width=True, config={'displayModeBar': False})
+                st.plotly_chart(plot_region_vs_happiness(filtered_df), use_container_width=True, config={'displayModeBar': False})
             
             with col2:
-                st.plotly_chart(plot_sleep_vs_anxiety(filtered_df), use_container_width=True)
-                st.plotly_chart(plot_gender_vs_stress(filtered_df), use_container_width=True)
+                st.plotly_chart(plot_sleep_vs_anxiety(filtered_df), use_container_width=True, config={'displayModeBar': False})
+                st.plotly_chart(plot_gender_vs_stress(filtered_df), use_container_width=True, config={'displayModeBar': False})
         
         elif page == "Device Usage":
             st.markdown("### 📱 Device Usage Analysis")
             col1, col2 = st.columns(2)
             with col1:
-                st.plotly_chart(plot_device_usage_vs_stress(filtered_df), use_container_width=True)
+                st.plotly_chart(plot_device_usage_vs_stress(filtered_df), use_container_width=True, config={'displayModeBar': False})
             with col2:
-                st.plotly_chart(plot_device_type_vs_productivity(filtered_df), use_container_width=True)
+                st.plotly_chart(plot_device_type_vs_productivity(filtered_df), use_container_width=True, config={'displayModeBar': False})
         
         elif page == "Sleep & Mental Health":
             st.markdown("### 😴 Sleep & Mental Health Insights")
             col1, col2 = st.columns(2)
             with col1:
-                st.plotly_chart(plot_sleep_vs_anxiety(filtered_df), use_container_width=True)
+                st.plotly_chart(plot_sleep_vs_anxiety(filtered_df), use_container_width=True, config={'displayModeBar': False})
             with col2:
-                st.plotly_chart(plot_income_vs_anxiety(filtered_df), use_container_width=True)
+                st.plotly_chart(plot_income_vs_anxiety(filtered_df), use_container_width=True, config={'displayModeBar': False})
         
         elif page == "Demographics":
             st.markdown("### 🎓 Demographic Insights")
             col1, col2 = st.columns(2)
             with col1:
-                st.plotly_chart(plot_region_vs_happiness(filtered_df), use_container_width=True)
+                st.plotly_chart(plot_region_vs_happiness(filtered_df), use_container_width=True, config={'displayModeBar': False})
             with col2:
-                st.plotly_chart(plot_gender_vs_stress(filtered_df), use_container_width=True)
+                st.plotly_chart(plot_gender_vs_stress(filtered_df), use_container_width=True, config={'displayModeBar': False})
             
-            st.plotly_chart(plot_education_vs_dependence(filtered_df), use_container_width=True)
+            st.plotly_chart(plot_education_vs_dependence(filtered_df), use_container_width=True, config={'displayModeBar': False})
         
         elif page == "Behavioral Patterns":
             st.markdown("### 📊 Behavioral Patterns")
-            st.plotly_chart(plot_phone_unlocks_vs_focus(filtered_df), use_container_width=True)
+            st.plotly_chart(plot_phone_unlocks_vs_focus(filtered_df), use_container_width=True, config={'displayModeBar': False})
         
         elif page == "Raw Data":
             st.markdown("### 📋 Raw Data")
