@@ -353,8 +353,23 @@ def plot_region_vs_happiness(df):
         hoverinfo='label+value'
     ))
     
-    fig = common_layout_updates(fig, 'Happiness by Region')
-    fig.update_layout(height=350)
+    # Specific layout for Pie chart to handle legend overlap
+    fig.update_layout(
+        title={'text': '<b>Happiness by Region</b>', 'font': {'size': 18, 'color': '#2d3748', 'family': 'Inter'}},
+        template='plotly_white',
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font=dict(family='Inter', color='#2d3748', size=12),
+        margin=dict(l=20, r=100, t=60, b=50),  # Increased right margin for legend
+        legend=dict(
+            orientation="v", 
+            yanchor="middle", 
+            y=0.5, 
+            xanchor="left", 
+            x=1.05  # Move legend strictly to the right
+        ),
+        dragmode=False
+    )
     return fig
 
 def plot_education_vs_dependence(df):
