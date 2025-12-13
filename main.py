@@ -360,11 +360,12 @@ def plot_region_vs_happiness(df):
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
         font=dict(family='Inter', color='#2d3748', size=12),
-        margin=dict(l=20, r=20, t=60, b=100),  # Large bottom margin for legend
+        margin=dict(l=20, r=20, t=60, b=120),  # Extra large bottom margin
+        height=500,  # Taller chart to accommodate legend
         legend=dict(
             orientation="h", 
             yanchor="top", 
-            y=-0.1, 
+            y=-0.15, 
             xanchor="center", 
             x=0.5
         ),
